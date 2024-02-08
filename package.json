@@ -43,6 +43,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.23.9",
 		"@babel/preset-env": "^7.23.9",
+		"axios": "^1.6.7",
 		"babel-jest": "^29.7.0",
 		"jest": "^29.7.0",
 		"jest-environment-jsdom": "^29.7.0",
