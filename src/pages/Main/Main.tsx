@@ -1,3 +1,3 @@
 export function Main() {
-	return <div test-id="main"></div>;
+	return <div test-id="main">main</div>;
 }
