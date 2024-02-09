@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
-import { Main, Note } from "./pages";
+import { Main, Note, Quiz } from "./pages";
 import { ROUTES } from "./constants";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route path={ROUTES.MAIN} element={<Main />} />
+						<Route path={ROUTES.QUIZ} element={<Quiz />} />
 						<Route path={ROUTES.NOTE} element=<Note /> />
 					</Routes>
 				</BrowserRouter>
