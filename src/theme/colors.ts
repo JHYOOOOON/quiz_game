@@ -1,5 +1,10 @@
 export const colors = {
-	green: "rgb(0, 200, 150)",
+	green050: "rgb(239, 255, 251)",
+	green100: "rgb(199, 240, 221)",
+	green300: "rgb(98, 241, 189)",
+	green500: "rgb(0, 200, 150)",
+	green700: "rgb(23, 162, 126)",
+	green900: "rgb(12, 141, 109)",
 	white: "hsl(0,0%,100%)",
 	purple: "hsl(260,73%,70%)",
 	gray050: "hsl(240,11%,98%)",
