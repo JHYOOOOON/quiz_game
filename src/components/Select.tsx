@@ -217,10 +217,11 @@ const StyledSelectContent = styled.ul`
 	top: 0;
 	left: 0;
 	width: 100%;
+	max-height: 200px;
+	overflow: auto;
 	border-radius: 5px;
 	background: ${({ theme }) => theme.colors.white};
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-	overflow: hidden;
 	z-index: 1;
 `;
 
