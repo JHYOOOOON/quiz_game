@@ -35,6 +35,5 @@ const Content = styled.main`
 	max-width: 500px;
 	min-width: 320px;
 	margin: 0 auto;
-	padding: 10px 15px;
 	background-color: ${({ theme }) => theme.colors.white};
 `;
