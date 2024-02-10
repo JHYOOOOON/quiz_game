@@ -11,7 +11,7 @@ export type Difficulty = "easy" | "medium" | "hard";
 
 export type Type = "boolean" | "multiple";
 
-type Question = {
+export type Question = {
 	type: Type;
 	difficulty: Difficulty;
 	category: string;

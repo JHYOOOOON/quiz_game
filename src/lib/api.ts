@@ -18,13 +18,13 @@ export const getCategories = async () => {
 };
 
 export const getQuestions = async (
-	amount: number,
+	amount: string,
 	category: WithAny<string>,
 	difficulty: WithAny<Difficulty>,
 	type: WithAny<Type>
 ) => {
 	const params: {
-		amount: number;
+		amount: string;
 		category?: string;
 		difficulty?: Difficulty;
 		type?: Type;
