@@ -1,15 +1,18 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 
 import GlobalStyles from "../../globalStyles";
 import * as Theme from "../../theme";
 
 const Template = ({ children }: React.PropsWithChildren) => {
 	return (
-		<ThemeProvider theme={Theme}>
-			<GlobalStyles />
-			{children}
-		</ThemeProvider>
+		<BrowserRouter>
+			<ThemeProvider theme={Theme}>
+				<GlobalStyles />
+				{children}
+			</ThemeProvider>
+		</BrowserRouter>
 	);
 };
 
