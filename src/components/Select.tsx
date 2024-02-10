@@ -63,12 +63,10 @@ export function Select({ children, target, onTargetChange }: SelectRootProps) {
 function SelectTrigger({ children }: PropsWithChildren) {
 	const { isOpen, onToggle } = useSelectContext();
 
-	const handleClose = () => onToggle(false);
-
 	const handleClick = () => onToggle((prev) => !prev);
 
 	return (
-		<StyledSelectTrigger onClick={handleClick} onBlur={handleClose}>
+		<StyledSelectTrigger onClick={handleClick}>
 			<p>{children}</p>
 			{isOpen ? <FaCaretUp /> : <FaCaretDown />}
 		</StyledSelectTrigger>
@@ -100,7 +98,15 @@ function SelectContent({ children }: PropsWithChildren) {
 	const getOptions = () => {
 		if (!contentRef.current) return;
 
-		return Array.from(contentRef.current.childNodes).map((child) => child.textContent);
+		return Array.from(contentRef.current.childNodes).map((child) => {
+			if (child.nodeType === Node.ELEMENT_NODE) {
+				const element = child as HTMLElement;
+
+				return element.dataset.label;
+			}
+
+			return "";
+		});
 	};
 
 	useEffect(() => {
@@ -165,6 +171,7 @@ function SelectOption({ children, label }: SelectOptionProps) {
 		<StyledSelectOption
 			role="option"
 			className={`${target === label ? "selected" : ""} ${activeItem === label ? "active" : ""}`}
+			data-label={label}
 			onClick={onClick}
 		>
 			{children}
@@ -194,9 +201,15 @@ const StyledSelectTrigger = styled.button`
 `;
 
 const StyledSelectContent = styled.ul`
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 	border-radius: 5px;
+	background: ${({ theme }) => theme.colors.white};
 	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 	overflow: hidden;
+	z-index: 1;
 `;
 
 const StyledSelectOption = styled.li`
