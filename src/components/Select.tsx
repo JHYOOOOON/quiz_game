@@ -53,6 +53,18 @@ export function Select({ children, target, onTargetChange }: SelectRootProps) {
 		};
 	}, []);
 
+	useEffect(() => {
+		const handleTab = (event: KeyboardEvent) => {
+			if (isOpen && event.key === "Tab") {
+				onToggle(false);
+			}
+		};
+
+		document.addEventListener("keydown", handleTab);
+
+		return () => document.removeEventListener("keydown", handleTab);
+	}, [isOpen]);
+
 	return (
 		<SelectContext.Provider value={{ isOpen, onToggle, target, onTargetChange }}>
 			<StyledSelect ref={selectRef}>{children}</StyledSelect>
