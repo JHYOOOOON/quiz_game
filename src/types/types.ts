@@ -5,7 +5,7 @@ type Category = {
 
 export type CategoryList = Category[];
 
-export type WithNull<T> = null | T;
+export type WithAny<T> = "any" | T;
 
 export type Difficulty = "easy" | "medium" | "hard";
 
