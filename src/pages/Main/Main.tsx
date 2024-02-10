@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, Header, Select } from "../../components";
-import { Difficulty, Type, WithAny } from "../../types";
+import { CategoryList, Difficulty, Type, WithAny } from "../../types";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../constants";
+import { getCategories } from "../../lib";
 
 const DIFFICULTY = {
 	any: "전체",
@@ -17,9 +20,37 @@ const TYPE = {
 };
 
 export function Main() {
+	const navigate = useNavigate();
 	const [amount, setAmount] = useState("5");
-	const [difficulty, setDifficulty] = useState<WithAny<Difficulty>>("easy");
+	const [difficulty, setDifficulty] = useState<WithAny<Difficulty>>("any");
 	const [type, setType] = useState<WithAny<Type>>("any");
+	const [categoryList, setCategoryList] = useState<CategoryList>([]);
+	const [category, setCategory] = useState<string>("");
+	const categoryName = useMemo(() => {
+		return categoryList.filter((item) => item.id.toString() === category)[0]?.name;
+	}, [category]);
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const data = await getCategories();
+
+				setCategoryList(data);
+				setCategory(data[0].id.toString());
+			} catch (error) {}
+		})();
+	}, []);
+
+	const startQuiz = () => {
+		navigate(ROUTES.QUIZ, {
+			state: {
+				amount,
+				difficulty,
+				type,
+				category,
+			},
+		});
+	};
 
 	return (
 		<Wrapper test-id="main">
@@ -36,6 +67,19 @@ export function Main() {
 								<Select.Option label={"10"}>10</Select.Option>
 								<Select.Option label={"15"}>15</Select.Option>
 								<Select.Option label={"20"}>20</Select.Option>
+							</Select.Content>
+						</Select>
+					</div>
+					<div>
+						<Label>문제 종류</Label>
+						<Select target={category} onTargetChange={(target: string) => setCategory(target)}>
+							<Select.Trigger>{categoryName}</Select.Trigger>
+							<Select.Content>
+								{categoryList.map((category) => (
+									<Select.Option key={category.id} label={String(category.id)}>
+										{category.name}
+									</Select.Option>
+								))}
 							</Select.Content>
 						</Select>
 					</div>
@@ -66,7 +110,7 @@ export function Main() {
 						</Select>
 					</div>
 				</SelectWrapper>
-				<Button $size="lg" $fullWidth>
+				<Button $size="lg" $fullWidth onClick={startQuiz}>
 					퀴즈 풀기
 				</Button>
 			</Section>
