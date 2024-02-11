@@ -10,15 +10,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, PropsWith
 	$size?: SizeType;
 }
 
-export function Button({ type, onClick, $fullWidth, $variant, $size, children, className }: ButtonProps) {
+export function Button({ type, onClick, $fullWidth, $variant, $size, children, className, ...rest }: ButtonProps) {
 	return (
 		<StyledButton
-			type={type || "button"}
 			onClick={onClick}
 			$fullWidth={$fullWidth}
 			$variant={$variant}
 			$size={$size}
 			className={className}
+			{...rest}
 		>
 			{children}
 		</StyledButton>
@@ -71,4 +71,8 @@ const StyledButton = styled.button<{ $fullWidth?: boolean; $variant?: VariantTyp
 			font-size: 16px;
 		`;
 	}}
+	&:disabled {
+		cursor: auto;
+		background-color: ${({ theme }) => theme.colors.gray400};
+	}
 `;
