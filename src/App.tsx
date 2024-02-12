@@ -4,13 +4,14 @@ import styled from "styled-components";
 
 import { Main, Note, Quiz } from "./pages";
 import { ROUTES } from "./constants";
+import { Loader } from "./components";
 
 function App() {
 	return (
 		<Background className="App">
 			<Content>
 				<BrowserRouter>
-					<Suspense fallback={<div>loading</div>}>
+					<Suspense fallback={<Loader />}>
 						<Routes>
 							<Route path={ROUTES.MAIN} element={<Main />} />
 							<Route path={ROUTES.QUIZ} element={<Quiz />} />
