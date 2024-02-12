@@ -23,6 +23,10 @@ export function Quiz() {
 		queryFn: () => {
 			const queries = ["amount", "category", "difficulty"].map((key) => searchParams.get(key) ?? "");
 
+			if (Boolean(queries[0]) === false) {
+				window.location.href = ROUTES.MAIN;
+			}
+
 			return getQuestions(queries[0], queries[1], queries[2]);
 		},
 	});
@@ -53,6 +57,7 @@ export function Quiz() {
 	const increaseStep = () => {
 		if (step === questionList.length - 1) {
 			navigate(ROUTES.RESULT);
+			return;
 		}
 		setStep((prev) => prev + 1);
 	};
@@ -222,6 +227,7 @@ const Answer = styled.button`
 	align-items: center;
 	gap: 5px;
 	flex: auto 1;
+	text-align: left;
 	font-size: 16px;
 	line-height: 1.15;
 	padding: 15px 20px;
