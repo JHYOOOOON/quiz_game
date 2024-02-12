@@ -6,7 +6,7 @@ import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { Button, ProgressBar } from "../../components";
 import { DIFFICULTY } from "../../constants";
 import { Question } from "../../types";
-import { incorrectListAtom } from "../../store";
+import { incorrectListAtom, startTimeAtom } from "../../store";
 
 interface IQuestion {
 	inform: Question;
@@ -22,8 +22,15 @@ export function Solve({ inform, answerList, total, step, increaseStep }: IQuesti
 	const isAnswered = useMemo(() => Boolean(answer), [answer]);
 	const isCorrect = useMemo(() => correct_answer === answer, [correct_answer, answer]);
 	const saveIncorrectList = useSetAtom(incorrectListAtom);
+	const setStartTime = useSetAtom(startTimeAtom);
 
 	useEffect(() => {
+		// 시작시간 초기화
+		setStartTime(new Date().getTime());
+	}, []);
+
+	useEffect(() => {
+		// 답변 초기화
 		setAnswer("");
 	}, [step]);
 
