@@ -2,7 +2,6 @@
 	"name": "quiz",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://jhyooooon.github.io/quiz/",
 	"dependencies": {
 		"@tanstack/react-query": "^5.20.1",
 		"@testing-library/jest-dom": "^6.4.2",
@@ -12,7 +11,6 @@
 		"@types/react": "^18.2.55",
 		"@types/react-dom": "^18.2.19",
 		"chart.js": "^4.4.1",
-		"gh-pages": "^6.1.1",
 		"history": "^5.3.0",
 		"jotai": "^2.6.4",
 		"react": "^18.2.0",
@@ -30,9 +28,7 @@
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "jest",
-		"eject": "react-scripts eject",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
