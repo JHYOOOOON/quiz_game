@@ -87,7 +87,7 @@ export function Main() {
 						</Select>
 					</div>
 				</SelectWrapper>
-				<Button $size="lg" $fullWidth onClick={startQuiz}>
+				<Button data-testid="submit" $size="lg" $fullWidth onClick={startQuiz}>
 					퀴즈 풀기
 				</Button>
 			</Section>
