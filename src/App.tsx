@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
-import { Main, Note, Quiz, Result } from "./pages";
+import { Main, Quiz, Result } from "./pages";
 import { ROUTES } from "./constants";
 import { Loader } from "./components";
 
