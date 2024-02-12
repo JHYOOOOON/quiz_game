@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,11 +10,13 @@ function App() {
 		<Background className="App">
 			<Content>
 				<BrowserRouter>
-					<Routes>
-						<Route path={ROUTES.MAIN} element={<Main />} />
-						<Route path={ROUTES.QUIZ} element={<Quiz />} />
-						<Route path={ROUTES.NOTE} element=<Note /> />
-					</Routes>
+					<Suspense fallback={<div>loading</div>}>
+						<Routes>
+							<Route path={ROUTES.MAIN} element={<Main />} />
+							<Route path={ROUTES.QUIZ} element={<Quiz />} />
+							<Route path={ROUTES.NOTE} element={<Note />} />
+						</Routes>
+					</Suspense>
 				</BrowserRouter>
 			</Content>
 		</Background>
