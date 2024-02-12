@@ -4,9 +4,15 @@ import userEvent from "@testing-library/user-event";
 import Template from "./Template";
 import { Quiz } from "../Quiz";
 import { createMemoryHistory } from "history";
-import { Router } from "react-router-dom";
+import { ROUTES } from "../../constants";
 
 const AMOUNT = 5;
+
+const mockUsedNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+	...jest.requireActual("react-router-dom"),
+	useNavigate: () => mockUsedNavigate,
+}));
 
 const getRandomNumber = (min: number, max: number) => {
 	const randomNumber = Math.random() * (max - min) + min;
@@ -26,14 +32,14 @@ const renderQuiz = () => {
 	);
 };
 
-const answerQuiz = () => {
-	const answerList = screen.getAllByTestId("answer");
+const answerQuiz = async () => {
+	const answerList = await screen.findAllByTestId("answer");
 	const answerButton = answerList[getRandomNumber(0, 3)];
 	userEvent.click(answerButton);
 };
 
-const clickNextButton = () => {
-	const nextButton = screen.getByTestId("submit");
+const clickNextButton = async () => {
+	const nextButton = await screen.findByTestId("submit");
 	userEvent.click(nextButton);
 };
 
@@ -46,21 +52,21 @@ test("사용자는 문항에 대한 답안을 4개 보기 중에 선택할 수 �
 });
 
 describe("사용자는 답안을 선택하면 다음 문항을 볼 수 있다.", () => {
-	test("답안 선택 후 다음 문항 버튼을 볼 수 있다.", () => {
+	test("답안 선택 후 다음 문항 버튼을 볼 수 있다.", async () => {
 		renderQuiz();
 
 		const nextQuizButton = screen.queryByTestId("submit");
 		expect(nextQuizButton).toBeNull();
 
-		answerQuiz();
+		await answerQuiz();
 
 		const nextButton = screen.getByTestId("submit");
 		expect(nextButton).toBeInTheDocument();
 	});
 
-	test("답안이 맞았는지 틀렸는지 바로 알 수 있다.", () => {
+	test("답안이 맞았는지 틀렸는지 바로 알 수 있다.", async () => {
 		renderQuiz();
-		answerQuiz();
+		await answerQuiz();
 		const resultInfom = screen.getByTestId("resultText");
 		expect(resultInfom).toBeInTheDocument();
 	});
@@ -71,7 +77,7 @@ describe("사용자는 답안을 선택하면 다음 문항을 볼 수 있다.",
 		const nowProgress = await screen.findByTestId("progress");
 		expect(nowProgress).toHaveTextContent(`1/${AMOUNT}`);
 
-		answerQuiz();
+		await answerQuiz();
 		clickNextButton();
 
 		const nextProgress = await screen.findByTestId("progress");
@@ -79,16 +85,14 @@ describe("사용자는 답안을 선택하면 다음 문항을 볼 수 있다.",
 	});
 });
 
-describe("모든 문제를 다 푼 후 결과 정보를 볼 수 있다.", () => {
-	test("모든 문제를 다 풀면 결과 정보로 이동한다.", async () => {
-		renderQuiz();
+test("모든 문제를 다 풀면 결과 정보로 이동한다.", async () => {
+	renderQuiz();
 
-		for (let page = 0; page < AMOUNT; page++) {
-			answerQuiz();
-			clickNextButton();
-		}
+	for (let page = 0; page < AMOUNT; page++) {
+		await answerQuiz();
+		await clickNextButton();
+	}
 
-		const ResultPage = await screen.findByTestId("result");
-		expect(ResultPage).toBeInTheDocument();
-	});
+	expect(mockUsedNavigate).toHaveBeenCalled();
+	expect(mockUsedNavigate).toHaveBeenCalledWith(ROUTES.RESULT);
 });
