@@ -1,52 +1,40 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Button, Header, Select } from "../../components";
-import { CategoryList, Difficulty, Type, WithAny } from "../../types";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../constants";
+import { useResetAtom } from "jotai/utils";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import styled from "styled-components";
+
+import { Button, Header, Select } from "../../components";
+import { Difficulty, WithAny } from "../../types";
+import { DIFFICULTY, ROUTES } from "../../constants";
 import { getCategories } from "../../lib";
-
-const DIFFICULTY = {
-	any: "전체",
-	easy: "쉬움",
-	medium: "중간",
-	hard: "어려움",
-};
-
-const TYPE = {
-	any: "전체",
-	multiple: "다중 선택",
-	boolean: "예/아니오",
-};
+import { withStepAtom } from "../../store";
 
 export function Main() {
 	const navigate = useNavigate();
 	const [amount, setAmount] = useState("5");
 	const [difficulty, setDifficulty] = useState<WithAny<Difficulty>>("any");
-	const [type, setType] = useState<WithAny<Type>>("any");
-	const [categoryList, setCategoryList] = useState<CategoryList>([]);
 	const [category, setCategory] = useState<string>("");
+	const resetStep = useResetAtom(withStepAtom);
+	const { data: categoryList } = useSuspenseQuery({
+		queryKey: ["category"],
+		queryFn: () => getCategories(),
+	});
 	const categoryName = useMemo(() => {
 		return categoryList.filter((item) => item.id.toString() === category)[0]?.name;
-	}, [category]);
+	}, [category, categoryList]);
 
 	useEffect(() => {
-		(async () => {
-			try {
-				const data = await getCategories();
-
-				setCategoryList(data);
-				setCategory(data[0].id.toString());
-			} catch (error) {}
-		})();
-	}, []);
+		// 카테고리 기본값 설정
+		setCategory(categoryList[0].id.toString());
+	}, [categoryList]);
 
 	const startQuiz = () => {
+		resetStep();
 		navigate(ROUTES.QUIZ, {
 			state: {
 				amount,
 				difficulty,
-				type,
 				category,
 			},
 		});
@@ -95,17 +83,6 @@ export function Main() {
 								<Select.Option label={"easy"}>{DIFFICULTY["easy"]}</Select.Option>
 								<Select.Option label={"medium"}>{DIFFICULTY["medium"]}</Select.Option>
 								<Select.Option label={"hard"}>{DIFFICULTY["hard"]}</Select.Option>
-							</Select.Content>
-						</Select>
-					</div>
-					<div>
-						<Label>문제 유형</Label>
-						<Select target={type} onTargetChange={(target: string) => setType(target as WithAny<Type>)}>
-							<Select.Trigger>{TYPE[type]}</Select.Trigger>
-							<Select.Content>
-								<Select.Option label={"any"}>{TYPE["any"]}</Select.Option>
-								<Select.Option label={"multiple"}>{TYPE["multiple"]}</Select.Option>
-								<Select.Option label={"boolean"}>{TYPE["boolean"]}</Select.Option>
 							</Select.Content>
 						</Select>
 					</div>

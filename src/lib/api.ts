@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Difficulty, Type, WithAny, CategoryResponse, QuestionResponse } from "../types";
+import { Difficulty, WithAny, CategoryResponse, QuestionResponse } from "../types";
 
 const instance = axios.create({
 	baseURL: "https://opentdb.com",
@@ -17,19 +17,15 @@ export const getCategories = async () => {
 	}
 };
 
-export const getQuestions = async (
-	amount: string,
-	category: WithAny<string>,
-	difficulty: WithAny<Difficulty>,
-	type: WithAny<Type>
-) => {
+export const getQuestions = async (amount: string, category: WithAny<string>, difficulty: WithAny<Difficulty>) => {
 	const params: {
 		amount: string;
 		category?: string;
 		difficulty?: Difficulty;
-		type?: Type;
+		type: string;
 	} = {
 		amount,
+		type: "multiple",
 	};
 
 	if (category) {
@@ -37,9 +33,6 @@ export const getQuestions = async (
 	}
 	if (difficulty !== "any") {
 		params.difficulty = difficulty;
-	}
-	if (type !== "any") {
-		params.type = type;
 	}
 
 	try {
