@@ -11,7 +11,7 @@ test("사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시�
 		</Template>
 	);
 
-	const startButton = screen.getByRole("button", { name: "퀴즈 풀기" });
+	const startButton = await screen.findByTestId("submit");
 	expect(startButton).toBeInTheDocument();
 
 	userEvent.click(startButton);
