@@ -26,25 +26,18 @@ export function Quiz() {
 		},
 	});
 
+	console.log(questionList);
+
 	const increaseStep = () => setStep((prev) => prev + 1);
 
 	const getAnswerList = (question: Question) =>
-		question.type === "multiple"
-			? shuffleArray<string>([question.correct_answer, ...question.incorrect_answers])
-			: [question.correct_answer, ...question.incorrect_answers].sort((a, b) => {
-					if (b > a) {
-						return 1;
-					} else if (a === b) {
-						return 0;
-					}
-					return -1;
-			  });
+		shuffleArray<string>([question.correct_answer, ...question.incorrect_answers]);
 
 	if (!questionList) return null;
 
 	return (
 		<Wrapper test-id="quiz">
-			<Header hasNote={false} />
+			<Header />
 			{step === questionList.length ? (
 				<div>결과</div>
 			) : (

@@ -1,27 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../constants";
 import styled from "styled-components";
-import { Button } from "./Button";
 
-interface IHeader {
-	hasNote?: boolean;
-}
-
-export function Header({ hasNote = true }: IHeader) {
+export function Header() {
 	const navigate = useNavigate();
 
 	const goMain = () => navigate(ROUTES.MAIN);
 
-	const goNote = () => navigate(ROUTES.NOTE);
-
 	return (
 		<Wrapper>
 			<Main onClick={goMain}>퀴즈</Main>
-			{hasNote && (
-				<Button $variant="secondary" $size="sm" onClick={goNote}>
-					오답노트
-				</Button>
-			)}
 		</Wrapper>
 	);
 }
