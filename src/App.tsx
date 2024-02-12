@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
-import { Main, Note, Quiz } from "./pages";
+import { Main, Note, Quiz, Result } from "./pages";
 import { ROUTES } from "./constants";
 import { Loader } from "./components";
 
@@ -15,6 +15,7 @@ function App() {
 						<Routes>
 							<Route path={ROUTES.MAIN} element={<Main />} />
 							<Route path={ROUTES.QUIZ} element={<Quiz />} />
+							<Route path={ROUTES.RESULT} element={<Result />} />
 							<Route path={ROUTES.NOTE} element={<Note />} />
 						</Routes>
 					</Suspense>
