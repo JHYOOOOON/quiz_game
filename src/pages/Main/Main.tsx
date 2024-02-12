@@ -34,7 +34,7 @@ export function Main() {
 	};
 
 	return (
-		<Wrapper test-id="main">
+		<Wrapper data-testid="main">
 			<Header />
 			<Title>퀴즈</Title>
 			<Section>
