@@ -21,3 +21,10 @@ export type Question = {
 };
 
 export type QuestionList = Question[];
+
+type Answer = Question & {
+	answer: string;
+	isCorrect: boolean;
+};
+
+export type AnswerList = Answer[];

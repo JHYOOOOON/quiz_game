@@ -1,12 +1,7 @@
 import { atom } from "jotai";
 
-import { QuestionList } from "../types";
-import { atomWithReset } from "jotai/utils";
+import { AnswerList } from "../types";
 
-export const stepAtom = atomWithReset(0);
-
-export const incorrectListAtom = atom<QuestionList>([]);
-
-export const startTimeAtom = atom<number>(0);
+export const answerListAtom = atom<AnswerList>([]);
 
 export const elapsedTimeAtom = atom<number>(0);

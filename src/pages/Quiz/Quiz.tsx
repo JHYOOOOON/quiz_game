@@ -10,13 +10,14 @@ import { DIFFICULTY, ROUTES } from "../../constants";
 import { getQuestions } from "../../lib";
 import { Question } from "../../types";
 import { shuffleArray } from "../../utils";
-import { incorrectListAtom, startTimeAtom } from "../../store";
+import { elapsedTimeAtom, answerListAtom } from "../../store";
 
 export function Quiz() {
 	const navigate = useNavigate();
 	const [step, setStep] = useState(0);
-	const setStartTime = useSetAtom(startTimeAtom);
-	const saveIncorrectList = useSetAtom(incorrectListAtom);
+	const [startTime, setStartTime] = useState(0);
+	const setElapsedTime = useSetAtom(elapsedTimeAtom);
+	const saveAnswerList = useSetAtom(answerListAtom);
 	const [searchParams, _] = useSearchParams();
 	const { data: questionList } = useSuspenseQuery({
 		queryKey: ["quiz"],
@@ -39,6 +40,8 @@ export function Quiz() {
 	const isCorrect = useMemo(() => inform.correct_answer === answer, [inform, answer]);
 
 	useEffect(() => {
+		// 저장된 답변 초기화
+		saveAnswerList([]);
 		// 시작시간 초기화
 		setStartTime(new Date().getTime());
 	}, []);
@@ -49,13 +52,14 @@ export function Quiz() {
 	}, [step]);
 
 	useEffect(() => {
-		if (isAnswered && inform.incorrect_answers.includes(answer)) {
-			saveIncorrectList((prevList) => [...prevList, inform]);
+		if (isAnswered) {
+			saveAnswerList((prev) => [...prev, { ...inform, isCorrect, answer }]);
 		}
-	}, [answer, inform, isAnswered, saveIncorrectList]);
+	}, [isAnswered]);
 
 	const increaseStep = () => {
 		if (step === questionList.length - 1) {
+			setElapsedTime(new Date().getTime() - startTime);
 			navigate(ROUTES.RESULT);
 			return;
 		}
@@ -99,7 +103,7 @@ export function Quiz() {
 	if (!questionList) return null;
 
 	return (
-		<Wrapper test-id="quiz">
+		<Wrapper data-testid="quiz">
 			<Header />
 			<QuizWrapper>
 				<ProgressBar total={questionList.length} step={step} />
