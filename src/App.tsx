@@ -16,7 +16,6 @@ function App() {
 							<Route path={ROUTES.MAIN} element={<Main />} />
 							<Route path={ROUTES.QUIZ} element={<Quiz />} />
 							<Route path={ROUTES.RESULT} element={<Result />} />
-							<Route path={ROUTES.NOTE} element={<Note />} />
 						</Routes>
 					</Suspense>
 				</BrowserRouter>
