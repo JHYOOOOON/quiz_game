@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useResetAtom } from "jotai/utils";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 
@@ -8,14 +7,12 @@ import { Button, Header, Select } from "../../components";
 import { Difficulty, WithAny } from "../../types";
 import { DIFFICULTY, ROUTES } from "../../constants";
 import { getCategories } from "../../lib";
-import { withStepAtom } from "../../store";
 
 export function Main() {
 	const navigate = useNavigate();
 	const [amount, setAmount] = useState("5");
 	const [difficulty, setDifficulty] = useState<WithAny<Difficulty>>("any");
 	const [category, setCategory] = useState<string>("");
-	const resetStep = useResetAtom(withStepAtom);
 	const { data: categoryList } = useSuspenseQuery({
 		queryKey: ["category"],
 		queryFn: () => getCategories(),
@@ -30,13 +27,9 @@ export function Main() {
 	}, [categoryList]);
 
 	const startQuiz = () => {
-		resetStep();
-		navigate(ROUTES.QUIZ, {
-			state: {
-				amount,
-				difficulty,
-				category,
-			},
+		navigate({
+			pathname: ROUTES.QUIZ,
+			search: `?${createSearchParams({ amount, difficulty, category })}`,
 		});
 	};
 

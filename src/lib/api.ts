@@ -17,11 +17,11 @@ export const getCategories = async () => {
 	}
 };
 
-export const getQuestions = async (amount: string, category: WithAny<string>, difficulty: WithAny<Difficulty>) => {
+export const getQuestions = async (amount: string, category?: string, difficulty?: string) => {
 	const params: {
 		amount: string;
 		category?: string;
-		difficulty?: Difficulty;
+		difficulty?: string;
 		type: string;
 	} = {
 		amount,
@@ -31,7 +31,7 @@ export const getQuestions = async (amount: string, category: WithAny<string>, di
 	if (category) {
 		params.category = category;
 	}
-	if (difficulty !== "any") {
+	if (difficulty && difficulty !== "any") {
 		params.difficulty = difficulty;
 	}
 

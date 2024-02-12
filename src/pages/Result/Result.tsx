@@ -1,3 +1,3 @@
 export function Result() {
-	return <div></div>;
+	return <div data-testid="result"></div>;
 }
