@@ -20,7 +20,7 @@ export function Quiz() {
 	const saveAnswerList = useSetAtom(answerListAtom);
 	const [searchParams, _] = useSearchParams();
 	const { data: questionList } = useSuspenseQuery({
-		queryKey: ["quiz"],
+		queryKey: ["quiz", searchParams.get("timestamp")],
 		queryFn: () => {
 			const queries = ["amount", "category", "difficulty"].map((key) => searchParams.get(key) ?? "");
 
@@ -101,6 +101,8 @@ export function Quiz() {
 	};
 
 	if (!questionList) return null;
+
+	// if (failureReason) return <Loader />;
 
 	return (
 		<Wrapper data-testid="quiz">

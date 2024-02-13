@@ -29,7 +29,7 @@ export function Main() {
 	const startQuiz = () => {
 		navigate({
 			pathname: ROUTES.QUIZ,
-			search: `?${createSearchParams({ amount, difficulty, category })}`,
+			search: `?${createSearchParams({ amount, difficulty, category, timestamp: new Date().getTime().toString() })}`,
 		});
 	};
 

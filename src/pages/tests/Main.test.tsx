@@ -60,6 +60,7 @@ test("사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시�
 			amount: "5",
 			difficulty: "any",
 			category: "1",
+			timestamp: new Date().getTime().toString(),
 		})}`,
 	});
 });
