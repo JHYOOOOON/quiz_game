@@ -51,7 +51,7 @@ export function Result() {
 						<p data-testid="time">소요 시간: {timeToSeconds(elapsedTime)}초</p>
 					</Inform>
 				</InformWrapper>
-				<div>
+				<NoteWrapper>
 					<NoteTitle>
 						<MdEventNote />
 						오답노트
@@ -75,7 +75,7 @@ export function Result() {
 							</NoteItem>
 						))}
 					</Note>
-				</div>
+				</NoteWrapper>
 			</Content>
 		</Wrapper>
 	);
@@ -85,6 +85,7 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	overflow: hidden;
 `;
 
 const Content = styled.div`
@@ -92,25 +93,26 @@ const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 20px 15px;
+	gap: 20px;
+	overflow: hidden;
 `;
 
 const Title = styled.p`
-	margin: 20px 0;
+	margin: 15px 0;
 	font-weight: bold;
 	font-size: 25px;
 	text-align: center;
 `;
 
 const DoughnutChart = styled.div`
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 `;
 
 const InformWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	flex: 1;
 `;
 
 const Inform = styled.div`
@@ -128,12 +130,19 @@ const Inform = styled.div`
 	}
 `;
 
+const NoteWrapper = styled.div`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	overflow: hidden;
+`;
+
 const NoteTitle = styled.p`
 	display: inline-flex;
 	align-items: center;
 	font-size: 20px;
 	font-weight: bold;
-	margin-bottom: 10px;
 	gap: 5px;
 `;
 
@@ -146,9 +155,9 @@ const NoteItem = styled.li`
 `;
 
 const Note = styled.ul`
+	flex: 1;
 	border-radius: 5px;
 	border: 1px solid ${({ theme }) => theme.colors.green500};
-	max-height: 270px;
 	overflow: auto;
 
 	${NoteItem}:not(:first-child) {
