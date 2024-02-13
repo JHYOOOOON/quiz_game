@@ -4,6 +4,9 @@ import userEvent from "@testing-library/user-event";
 import { Select } from "../Select";
 import { Template } from "./Template";
 
+let scrollIntoViewMock = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+
 const renderSelect = () => {
 	const mockOnTargetChange = jest.fn();
 
