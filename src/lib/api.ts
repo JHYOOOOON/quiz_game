@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Difficulty, WithAny, CategoryResponse, QuestionResponse } from "../types";
+import { CategoryResponse, QuestionResponse } from "../types";
 
 const instance = axios.create({
 	baseURL: "https://opentdb.com",
