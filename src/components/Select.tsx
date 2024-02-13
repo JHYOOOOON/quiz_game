@@ -123,27 +123,49 @@ function SelectContent({ children, ...rest }: PropsWithChildren) {
 		});
 	};
 
+	const autoScroll = () => {
+		if (!contentRef.current) return;
+
+		const activeElement = contentRef.current.querySelector(".active");
+
+		if (activeElement) {
+			activeElement.scrollIntoView({ block: "center" });
+		}
+	};
+
+	useEffect(() => {
+		if (isOpen) {
+			autoScroll();
+		}
+	}, [isOpen]);
+
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			const list = getOptions();
 			if (!list) return;
+
+			if (event.key === "Enter") {
+				event.preventDefault();
+				onTargetChange(activeItem);
+				onToggle(false);
+				return;
+			}
 
 			const targetIndex = list.indexOf(activeItem);
 			let nextTargetIndex = 0;
 
 			if (event.key === "ArrowDown") {
 				nextTargetIndex = targetIndex === list.length - 1 ? 0 : targetIndex + 1;
-				onActiveItemChange(list[nextTargetIndex] as string);
 			} else if (event.key === "ArrowUp") {
 				nextTargetIndex = targetIndex === 0 ? list.length - 1 : targetIndex - 1;
+			}
+
+			if (targetIndex !== nextTargetIndex) {
 				onActiveItemChange(list[nextTargetIndex] as string);
-			} else if (event.key === "Enter") {
-				event.preventDefault();
-				onTargetChange(activeItem);
-				onToggle(false);
 			}
 		};
 
+		autoScroll();
 		document.addEventListener("keydown", handleKeyDown);
 
 		return () => document.removeEventListener("keydown", handleKeyDown);
