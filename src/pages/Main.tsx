@@ -7,6 +7,7 @@ import { Button, Header, Select } from "../components";
 import { Difficulty, WithAny } from "../types";
 import { DIFFICULTY, ROUTES } from "../constants";
 import { getCategories } from "../lib";
+import { getTimestamp } from "../utils";
 
 export function Main() {
 	const navigate = useNavigate();
@@ -29,7 +30,7 @@ export function Main() {
 	const startQuiz = () => {
 		navigate({
 			pathname: ROUTES.QUIZ,
-			search: `?${createSearchParams({ amount, difficulty, category, timestamp: new Date().getTime().toString() })}`,
+			search: `?${createSearchParams({ amount, difficulty, category, timestamp: getTimestamp() })}`,
 		});
 	};
 

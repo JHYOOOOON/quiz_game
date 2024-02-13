@@ -10,6 +10,7 @@ import * as Theme from "../../theme";
 import { ROUTES } from "../../constants";
 import { Router } from "../../Router";
 import { Loader } from "../../components";
+import { getTimestamp } from "../../utils";
 
 const navigate = jest.fn();
 
@@ -19,6 +20,8 @@ jest.mock("../../lib", () => ({
 		{ id: 2, name: "b" },
 	]),
 }));
+
+Date.now = jest.fn(() => new Date(Date.UTC(2024, 2, 15)).valueOf());
 
 beforeEach(() => {
 	jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
@@ -60,7 +63,7 @@ test("사용자는 '퀴즈 풀기' 버튼을 클릭하여 퀴즈 풀기를 시�
 			amount: "5",
 			difficulty: "any",
 			category: "1",
-			timestamp: new Date().getTime().toString(),
+			timestamp: getTimestamp(),
 		})}`,
 	});
 });
