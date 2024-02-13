@@ -18,7 +18,7 @@ export function Quiz() {
 	const [startTime, setStartTime] = useState(0);
 	const setElapsedTime = useSetAtom(elapsedTimeAtom);
 	const saveAnswerList = useSetAtom(answerListAtom);
-	const [searchParams, _] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const { data: questionList } = useSuspenseQuery({
 		queryKey: ["quiz", searchParams.get("timestamp")],
 		queryFn: () => {
