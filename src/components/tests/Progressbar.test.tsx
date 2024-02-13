@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import Template from "../../pages/tests/Template";
-import { ProgressBar } from "../ProgressBar";
+
 import { getPercentage } from "../../utils";
+import { Template } from "./Template";
+import { ProgressBar } from "../ProgressBar";
 
 test("Progressbar가 올바르게 렌더링되는지 확인합니다.", () => {
 	const total = 5;

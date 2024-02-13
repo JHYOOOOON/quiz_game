@@ -3,7 +3,7 @@ import * as router from "react-router";
 
 import { Header } from "../Header";
 import { ROUTES } from "../../constants";
-import Template from "../../pages/tests/Template";
+import { Template } from "./Template";
 
 const navigate = jest.fn();
 

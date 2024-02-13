@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import { Loader } from "../Loader";
 import * as Theme from "../../theme";
-import Template from "../../pages/tests/Template";
+import { Template } from "./Template";
 
 test("Loader가 올바르게 렌더링되었는지 확인합니다.", () => {
 	render(

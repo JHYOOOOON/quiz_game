@@ -3,12 +3,7 @@ import userEvent from "@testing-library/user-event";
 
 import * as Theme from "../../theme";
 import { Button } from "../Button";
-import { PropsWithChildren } from "react";
-import { ThemeProvider } from "styled-components";
-
-const Template = ({ children }: PropsWithChildren) => {
-	return <ThemeProvider theme={Theme}>{children}</ThemeProvider>;
-};
+import { Template } from "./Template";
 
 describe("Button", () => {
 	test("버튼이 렌더링되고, 클릭 이벤트가 발생할 때 onClick 함수가 호출되는지 확인합니다.", () => {

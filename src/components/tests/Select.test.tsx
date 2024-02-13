@@ -1,15 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ThemeProvider } from "styled-components";
 
 import { Select } from "../Select";
-import * as Theme from "../../theme";
+import { Template } from "./Template";
 
 const renderSelect = () => {
 	const mockOnTargetChange = jest.fn();
 
 	render(
-		<ThemeProvider theme={Theme}>
+		<Template>
 			<Select target="Option 1" onTargetChange={mockOnTargetChange}>
 				<Select.Trigger data-testid="trigger">Option 1</Select.Trigger>
 				<Select.Content data-testid="content">
@@ -24,7 +23,7 @@ const renderSelect = () => {
 					</Select.Option>
 				</Select.Content>
 			</Select>
-		</ThemeProvider>
+		</Template>
 	);
 
 	return { mockOnTargetChange };
