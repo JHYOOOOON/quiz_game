@@ -13,7 +13,7 @@ test("Progressbar가 올바르게 렌더링되는지 확인합니다.", () => {
 		</Template>
 	);
 
-	const progressBar = screen.getByTestId("progress");
+	const progressBar = screen.getByTestId("progressbar");
 
 	expect(progressBar).toHaveStyle(`width: ${getPercentage(total, step)}%`);
 	expect(progressBar).toHaveStyle(`width: 20%`);

@@ -10,7 +10,7 @@ export function ProgressBar({ total, step }: IProgressBar) {
 	const percentage = getPercentage(total, step);
 	return (
 		<Background>
-			<Progress $percentage={percentage} data-testid="progress" />
+			<Progress $percentage={percentage} data-testid="progressbar" />
 		</Background>
 	);
 }
