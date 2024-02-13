@@ -1,10 +1,9 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
 
-import { Main, Quiz, Result } from "./pages";
-import { ROUTES } from "./constants";
 import { Loader } from "./components";
+import { Router } from "./Router";
 
 function App() {
 	return (
@@ -12,11 +11,7 @@ function App() {
 			<Content>
 				<BrowserRouter>
 					<Suspense fallback={<Loader />}>
-						<Routes>
-							<Route path={ROUTES.MAIN} element={<Main />} />
-							<Route path={ROUTES.QUIZ} element={<Quiz />} />
-							<Route path={ROUTES.RESULT} element={<Result />} />
-						</Routes>
+						<Router />
 					</Suspense>
 				</BrowserRouter>
 			</Content>
