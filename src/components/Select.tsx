@@ -26,7 +26,7 @@ const useSelectContext = () => {
 
 interface SelectRootProps extends PropsWithChildren, SelectProps {}
 
-export function Select({ children, target, onTargetChange }: SelectRootProps) {
+export function Select({ children, target, onTargetChange, ...rest }: SelectRootProps) {
 	const [isOpen, onToggle] = useState(false);
 	const selectRef = useRef<HTMLDivElement>(null);
 
@@ -67,18 +67,20 @@ export function Select({ children, target, onTargetChange }: SelectRootProps) {
 
 	return (
 		<SelectContext.Provider value={{ isOpen, onToggle, target, onTargetChange }}>
-			<StyledSelect ref={selectRef}>{children}</StyledSelect>
+			<StyledSelect ref={selectRef} {...rest}>
+				{children}
+			</StyledSelect>
 		</SelectContext.Provider>
 	);
 }
 
-function SelectTrigger({ children }: PropsWithChildren) {
+function SelectTrigger({ children, ...rest }: PropsWithChildren) {
 	const { isOpen, onToggle } = useSelectContext();
 
 	const handleClick = () => onToggle((prev) => !prev);
 
 	return (
-		<StyledSelectTrigger onClick={handleClick}>
+		<StyledSelectTrigger onClick={handleClick} {...rest}>
 			<p>{children}</p>
 			{isOpen ? <FaCaretUp /> : <FaCaretDown />}
 		</StyledSelectTrigger>
@@ -102,7 +104,7 @@ const useSelectContentContext = () => {
 	return context;
 };
 
-function SelectContent({ children }: PropsWithChildren) {
+function SelectContent({ children, ...rest }: PropsWithChildren) {
 	const [activeItem, onActiveItemChange] = useState("");
 	const { isOpen, onToggle, target, onTargetChange } = useSelectContext();
 	const contentRef = useRef<HTMLUListElement>(null);
@@ -157,7 +159,7 @@ function SelectContent({ children }: PropsWithChildren) {
 		<>
 			{isOpen ? (
 				<SelectContentContext.Provider value={{ activeItem, contentRef }}>
-					<StyledSelectContent role="listbox" ref={contentRef}>
+					<StyledSelectContent role="listbox" ref={contentRef} {...rest}>
 						{children}
 					</StyledSelectContent>
 				</SelectContentContext.Provider>
@@ -170,7 +172,7 @@ interface SelectOptionProps extends PropsWithChildren {
 	label: string;
 }
 
-function SelectOption({ children, label }: SelectOptionProps) {
+function SelectOption({ children, label, ...rest }: SelectOptionProps) {
 	const { target, onTargetChange, onToggle } = useSelectContext();
 	const { activeItem } = useSelectContentContext();
 
@@ -185,6 +187,7 @@ function SelectOption({ children, label }: SelectOptionProps) {
 			className={`${target === label ? "selected" : ""} ${activeItem === label ? "active" : ""}`}
 			data-label={label}
 			onClick={onClick}
+			{...rest}
 		>
 			{children}
 		</StyledSelectOption>
