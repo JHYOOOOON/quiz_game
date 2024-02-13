@@ -115,7 +115,7 @@ export function Quiz() {
 						</Progress>
 						<QuestionInform>
 							<p>문제 유형:</p>
-							<p>{inform.category}</p>
+							<p dangerouslySetInnerHTML={{ __html: inform.category }} />
 						</QuestionInform>
 						<QuestionInform>
 							<p>난이도:</p>
