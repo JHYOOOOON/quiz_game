@@ -52,6 +52,7 @@ export function Quiz() {
 	}, [step]);
 
 	useEffect(() => {
+		// 내 답안 저장
 		if (isAnswered) {
 			saveAnswerList((prev) => [...prev, { ...inform, isCorrect, answer }]);
 		}
