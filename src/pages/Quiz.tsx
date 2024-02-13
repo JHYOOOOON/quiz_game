@@ -102,8 +102,6 @@ export function Quiz() {
 
 	if (!questionList) return null;
 
-	// if (failureReason) return <Loader />;
-
 	return (
 		<Wrapper data-testid="quiz">
 			<Header />
