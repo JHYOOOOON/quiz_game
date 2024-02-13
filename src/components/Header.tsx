@@ -9,7 +9,9 @@ export function Header() {
 
 	return (
 		<Wrapper>
-			<Main onClick={goMain}>퀴즈</Main>
+			<Main onClick={goMain} data-testid="main">
+				퀴즈
+			</Main>
 		</Wrapper>
 	);
 }
