@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { getPercentage } from "../utils";
 
 interface IProgressBar {
 	total: number;
@@ -6,9 +7,10 @@ interface IProgressBar {
 }
 
 export function ProgressBar({ total, step }: IProgressBar) {
+	const percentage = getPercentage(total, step);
 	return (
 		<Background>
-			<Progress $percentage={((step + 1) / total) * 100} />
+			<Progress $percentage={percentage} data-testid="progress" />
 		</Background>
 	);
 }
