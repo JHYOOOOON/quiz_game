@@ -32,6 +32,7 @@ const Content = styled.main`
 	height: 100%;
 	max-width: 500px;
 	min-width: 320px;
+	min-height: 640px;
 	margin: 0 auto;
 	background-color: ${({ theme }) => theme.colors.white};
 `;
