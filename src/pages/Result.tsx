@@ -5,12 +5,12 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { useNavigate } from "react-router-dom";
 import { MdEventNote } from "react-icons/md";
 
-import * as Theme from "../../theme";
-import { answerListAtom, elapsedTimeAtom } from "../../store";
-import { Header } from "../../components";
-import { ROUTES } from "../../constants";
+import * as Theme from "../theme";
+import { answerListAtom, elapsedTimeAtom } from "../store";
+import { Header } from "../components";
+import { ROUTES } from "../constants";
 import styled from "styled-components";
-import { getCorrectCount, getIncorrectList, timeToSeconds } from "../../utils";
+import { getCorrectCount, getIncorrectList, timeToSeconds } from "../utils";
 
 Chart.register(ArcElement, Tooltip, Legend);
 

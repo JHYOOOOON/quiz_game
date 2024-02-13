@@ -5,12 +5,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
-import { Button, Header, ProgressBar } from "../../components";
-import { DIFFICULTY, ROUTES } from "../../constants";
-import { getQuestions } from "../../lib";
-import { Question } from "../../types";
-import { shuffleArray } from "../../utils";
-import { elapsedTimeAtom, answerListAtom } from "../../store";
+import { Button, Header, ProgressBar } from "../components";
+import { DIFFICULTY, ROUTES } from "../constants";
+import { getQuestions } from "../lib";
+import { Question } from "../types";
+import { shuffleArray } from "../utils";
+import { elapsedTimeAtom, answerListAtom } from "../store";
 
 export function Quiz() {
 	const navigate = useNavigate();

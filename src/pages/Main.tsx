@@ -3,10 +3,10 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 
-import { Button, Header, Select } from "../../components";
-import { Difficulty, WithAny } from "../../types";
-import { DIFFICULTY, ROUTES } from "../../constants";
-import { getCategories } from "../../lib";
+import { Button, Header, Select } from "../components";
+import { Difficulty, WithAny } from "../types";
+import { DIFFICULTY, ROUTES } from "../constants";
+import { getCategories } from "../lib";
 
 export function Main() {
 	const navigate = useNavigate();
