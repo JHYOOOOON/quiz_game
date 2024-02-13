@@ -4,9 +4,9 @@ export function Loader() {
 	return (
 		<Wrapper data-testid="loader">
 			<LoaderItems>
-				<span></span>
-				<span></span>
-				<span></span>
+				<span role="presentation"></span>
+				<span role="presentation"></span>
+				<span role="presentation"></span>
 			</LoaderItems>
 		</Wrapper>
 	);
