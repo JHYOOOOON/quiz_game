@@ -10,6 +10,7 @@ import { answerListAtom, elapsedTimeAtom } from "../../store";
 import { Header } from "../../components";
 import { ROUTES } from "../../constants";
 import styled from "styled-components";
+import { getCorrectCount, getIncorrectList, timeToSeconds } from "../../utils";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -17,7 +18,7 @@ export function Result() {
 	const navigate = useNavigate();
 	const elapsedTime = useAtomValue(elapsedTimeAtom);
 	const answerList = useAtomValue(answerListAtom);
-	const incorrectList = answerList.filter((answer) => answer.isCorrect === false);
+	const incorrectList = getIncorrectList(answerList);
 	const data = {
 		labels: ["정답", "오답"],
 		datasets: [
@@ -45,9 +46,9 @@ export function Result() {
 						<Doughnut data={data} />
 					</DoughnutChart>
 					<Inform>
-						<p data-testid="correct">정답: {answerList.length - incorrectList.length}문제</p>
+						<p data-testid="correct">정답: {getCorrectCount(answerList.length, incorrectList.length)}문제</p>
 						<p data-testid="incorrect">오답: {incorrectList.length}문제</p>
-						<p data-testid="time">소요 시간: {(elapsedTime / 1000).toFixed(2)}초</p>
+						<p data-testid="time">소요 시간: {timeToSeconds(elapsedTime)}초</p>
 					</Inform>
 				</InformWrapper>
 				<div>
