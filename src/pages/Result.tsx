@@ -56,25 +56,31 @@ export function Result() {
 						<MdEventNote />
 						오답노트
 					</NoteTitle>
-					<Note>
-						{incorrectList.map((item) => (
-							<NoteItem key={item.answer}>
-								<Question>
-									<p>Q.</p> <p dangerouslySetInnerHTML={{ __html: item.question }} />
-								</Question>
-								<AnswerWrapper>
-									<Answer className="correct">
-										<p>정답: </p>
-										<p dangerouslySetInnerHTML={{ __html: item.correct_answer }} />
-									</Answer>
-									<Answer className="incorrect">
-										<p>내 답안: </p>
-										<p dangerouslySetInnerHTML={{ __html: item.answer }} />
-									</Answer>
-								</AnswerWrapper>
-							</NoteItem>
-						))}
-					</Note>
+					<NoteContainer>
+						{incorrectList.length === 0 ? (
+							<RightText>다 맞히셨네요!</RightText>
+						) : (
+							<Note>
+								{incorrectList.map((item) => (
+									<NoteItem key={item.answer}>
+										<Question>
+											<p>Q.</p> <p dangerouslySetInnerHTML={{ __html: item.question }} />
+										</Question>
+										<AnswerWrapper>
+											<Answer className="correct">
+												<p>정답: </p>
+												<p dangerouslySetInnerHTML={{ __html: item.correct_answer }} />
+											</Answer>
+											<Answer className="incorrect">
+												<p>내 답안: </p>
+												<p dangerouslySetInnerHTML={{ __html: item.answer }} />
+											</Answer>
+										</AnswerWrapper>
+									</NoteItem>
+								))}
+							</Note>
+						)}
+					</NoteContainer>
 				</NoteWrapper>
 			</Content>
 		</Wrapper>
@@ -146,6 +152,11 @@ const NoteTitle = styled.p`
 	gap: 5px;
 `;
 
+const NoteContainer = styled.div`
+	flex: 1;
+	overflow: hidden;
+`;
+
 const NoteItem = styled.li`
 	position: relative;
 	display: flex;
@@ -154,8 +165,18 @@ const NoteItem = styled.li`
 	gap: 10px;
 `;
 
+const RightText = styled.p`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 1px solid ${({ theme }) => theme.colors.green500};
+`;
+
 const Note = styled.ul`
-	flex: 1;
+	max-height: 100%;
 	border-radius: 5px;
 	border: 1px solid ${({ theme }) => theme.colors.green500};
 	overflow: auto;
