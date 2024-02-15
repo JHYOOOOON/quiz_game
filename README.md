@@ -13,11 +13,16 @@
 ## 스크린샷
 
 1. 메인
-   <img width="490" alt="스크린샷 2024-02-15 오후 1 20 59" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/cee1cc89-195e-4934-83c3-2582366e84d3">
+
+   <img width="360" alt="스크린샷 2024-02-15 오후 1 20 59" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/cee1cc89-195e-4934-83c3-2582366e84d3">
+
 2. 퀴즈
-   <img width="490" alt="스크린샷 2024-02-15 오후 1 21 09" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/81f679d2-4216-401b-b00c-5cf4018c2c6e">
+
+   <img width="360" alt="스크린샷 2024-02-15 오후 1 21 09" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/81f679d2-4216-401b-b00c-5cf4018c2c6e">
+
 3. 결과
-   <img width="490" alt="스크린샷 2024-02-15 오후 1 21 25" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/77e2107d-c2b3-45c4-97e4-611df96cbd54">
+
+   <img width="360" alt="스크린샷 2024-02-15 오후 1 21 25" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/77e2107d-c2b3-45c4-97e4-611df96cbd54">
 
 ## 실행방법
 
