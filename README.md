@@ -43,8 +43,8 @@ npm run test:pages
 
 - 웹접근성을 고려한 Tab키 조작
   - `selectbox` 커스텀
-  - 화살표 위, 아래키로 옵션 포커스 이동 및 `enter` 키로 선택 가능
-  - `esc` 키 입력, `selecbox` 외부 클릭으로 닫힘 처리
+  - 화살표 위, 아래키로 옵션 내 포커스 이동 및 `enter` 키로 옵션 선택 가능
+  - `esc` 키 입력, `selectbox` 외부 클릭으로 닫힘 처리
 - 기능 요구사항 및 컴포넌트 동작 확인을 위한 단위테스트 진행
   - Jest, React-Testing-Library를 이용
   - 렌더링 및 각 컴포넌트 내 중요 기능 위주로 테스트 진행
