@@ -1,46 +1,46 @@
-# Getting Started with Create React App
+# Quiz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+홈에서 선택한 옵션을 바탕으로 퀴즈를 풀고, 그에 대한 결과를 받아볼 수 있는 프로젝트
 
-## Available Scripts
+## 기술스택
 
-In the project directory, you can run:
+- React, Typescript
+- React-Query, Jotai
+- Styled-components
+- chart.js
+- Jest, React Testing Library
 
-### `npm start`
+## 스크린샷
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. 메인
+   <img width="490" alt="스크린샷 2024-02-15 오후 1 20 59" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/cee1cc89-195e-4934-83c3-2582366e84d3">
+2. 퀴즈
+   <img width="490" alt="스크린샷 2024-02-15 오후 1 21 09" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/81f679d2-4216-401b-b00c-5cf4018c2c6e">
+3. 결과
+   <img width="490" alt="스크린샷 2024-02-15 오후 1 21 25" src="https://github.com/JHYOOOOON/quiz_game/assets/50460114/77e2107d-c2b3-45c4-97e4-611df96cbd54">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 실행방법
 
-### `npm test`
+```zsh
+git clone https://github.com/JHYOOOOON/quiz_game.git
+npm install
+npm start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+// 전체 테스트
+npm test
+// components만 테스트
+npm run test:components
+// pages만 테스트
+npm run test:pages
+```
 
-### `npm run build`
+## 그 외
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 웹접근성을 고려한 Tab키 조작
+  - `selectbox` 커스텀
+  - 화살표 위, 아래키로 옵션 포커스 이동 및 `enter` 키로 선택 가능
+  - `esc` 키 입력, `selecbox` 외부 클릭으로 닫힘 처리
+- 기능 요구사항 및 컴포넌트 동작 확인을 위한 단위테스트 진행
+  - Jest, React-Testing-Library를 이용
+  - 렌더링 및 각 컴포넌트 내 중요 기능 위주로 테스트 진행
+- `useSuspenseQuery`와 `Suspense`를 이용한 loading 처리
