@@ -134,7 +134,7 @@ export function Quiz() {
 									onClick={handleAnswer(item)}
 									disabled={isAnswered}
 								>
-									{getIcon(item, index)}
+									<Icon>{getIcon(item, index)}</Icon>
 									<p dangerouslySetInnerHTML={{ __html: item }} />
 								</Answer>
 							))}
@@ -225,6 +225,14 @@ const AnswerList = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
+`;
+
+const Icon = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	width: 16px;
 `;
 
 const Answer = styled.button`
